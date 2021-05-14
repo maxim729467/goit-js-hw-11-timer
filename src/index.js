@@ -32,12 +32,12 @@ const pad = function (value) {
     }
 
     init() {
-
+        const passedDateVal = '00';
             if (this.targetDate <= new Date()) {
-            this.dayCell.textContent =    "00";
-            this.hourCell.textContent =   "00";
-            this.minCell.textContent = "00";
-            this.secCell.textContent = "00";
+            this.dayCell.textContent = passedDateVal;
+            this.hourCell.textContent = passedDateVal;
+            this.minCell.textContent = passedDateVal;
+            this.secCell.textContent = passedDateVal;
             return;
         }
         
@@ -67,11 +67,9 @@ const pad = function (value) {
     }
 };
 
-
 const timer = new CountdownTimer({
   selector: '#timer-1',
   targetDate: new Date('Jun 1, 2021'),
 });
-
 
 
