@@ -2,8 +2,13 @@ import './styles.css';
 
 class CountdownTimer {
     constructor({selector, targetDate}) {
-        this.selector = selector;
         this.targetDate = targetDate;
+
+        this.dayCell = document.querySelector(`${selector} [data-value="days"]`);
+        this.hourCell = document.querySelector(`${selector} [data-value="hours"]`);
+        this.minCell = document.querySelector(`${selector} [data-value="mins"]`);
+        this.secCell = document.querySelector(`${selector} [data-value="secs"]`);
+
         this.init();
         this.startCount();
     }
@@ -27,50 +32,36 @@ const pad = function (value) {
     }
 
     init() {
-    const timerBlock = document.querySelector(`${this.selector}`);
-    const plugin = {
-      day: timerBlock.children[0].firstElementChild,
-      hour: timerBlock.children[1].firstElementChild,
-      minute: timerBlock.children[2].firstElementChild,
-      second: timerBlock.children[3].firstElementChild,
-};
 
             if (this.targetDate <= new Date()) {
-            plugin.day.textContent =    "00";
-            plugin.hour.textContent =   "00";
-            plugin.minute.textContent = "00";
-            plugin.second.textContent = "00";
+            this.dayCell.textContent =    "00";
+            this.hourCell.textContent =   "00";
+            this.minCell.textContent = "00";
+            this.secCell.textContent = "00";
             return;
         }
         
             let remainingTime = this.convertTime(this.targetDate - new Date());
-            plugin.day.textContent = remainingTime.days;
-            plugin.hour.textContent = remainingTime.hours;
-            plugin.minute.textContent = remainingTime.mins;
-            plugin.second.textContent = remainingTime.secs;
+            this.dayCell.textContent = remainingTime.days;
+            this.hourCell.textContent = remainingTime.hours;
+            this.minCell.textContent = remainingTime.mins;
+            this.secCell.textContent = remainingTime.secs;
         
 
     }
 
     startCount() {
         const timerActivity = setInterval(() => {
-            const timerBlock = document.querySelector(`${this.selector}`);
-  const plugin = {
-      day: timerBlock.children[0].firstElementChild,
-      hour: timerBlock.children[1].firstElementChild,
-      minute: timerBlock.children[2].firstElementChild,
-      second: timerBlock.children[3].firstElementChild,
-};
 
             if (this.targetDate <= new Date()) {
                 clearInterval(timerActivity);
                 return;
      }
             let remainingTime = this.convertTime(this.targetDate - new Date());
-            plugin.day.textContent = remainingTime.days;
-            plugin.hour.textContent = remainingTime.hours;
-            plugin.minute.textContent = remainingTime.mins;
-            plugin.second.textContent = remainingTime.secs;
+            this.dayCell.textContent = remainingTime.days;
+            this.hourCell.textContent = remainingTime.hours;
+            this.minCell.textContent = remainingTime.mins;
+            this.secCell.textContent = remainingTime.secs;
             
         }, 1000);
     }
@@ -81,5 +72,6 @@ const timer = new CountdownTimer({
   selector: '#timer-1',
   targetDate: new Date('Jun 1, 2021'),
 });
+
 
 
