@@ -31,6 +31,14 @@ const pad = function (value) {
 
     }
 
+    initVals() {
+let remainingTime = this.convertTime(this.targetDate - new Date());
+            this.dayCell.textContent = remainingTime.days;
+            this.hourCell.textContent = remainingTime.hours;
+            this.minCell.textContent = remainingTime.mins;
+            this.secCell.textContent = remainingTime.secs;
+    }
+
     init() {
         const passedDateVal = '00';
             if (this.targetDate <= new Date()) {
@@ -40,14 +48,9 @@ const pad = function (value) {
             this.secCell.textContent = passedDateVal;
             return;
         }
-        
-            let remainingTime = this.convertTime(this.targetDate - new Date());
-            this.dayCell.textContent = remainingTime.days;
-            this.hourCell.textContent = remainingTime.hours;
-            this.minCell.textContent = remainingTime.mins;
-            this.secCell.textContent = remainingTime.secs;
-        
 
+        this.initVals();
+        
     }
 
     startCount() {
@@ -56,12 +59,9 @@ const pad = function (value) {
             if (this.targetDate <= new Date()) {
                 clearInterval(timerActivity);
                 return;
-     }
-            let remainingTime = this.convertTime(this.targetDate - new Date());
-            this.dayCell.textContent = remainingTime.days;
-            this.hourCell.textContent = remainingTime.hours;
-            this.minCell.textContent = remainingTime.mins;
-            this.secCell.textContent = remainingTime.secs;
+            }
+            
+            this.initVals();
             
         }, 1000);
     }
