@@ -2,18 +2,24 @@ import './styles.css';
 
 class CountdownTimer {
     constructor({selector, targetDate}) {
-        this.targetDate = targetDate;
-
-        this.dayCell = document.querySelector(`${selector} [data-value="days"]`);
-        this.hourCell = document.querySelector(`${selector} [data-value="hours"]`);
-        this.minCell = document.querySelector(`${selector} [data-value="mins"]`);
-        this.secCell = document.querySelector(`${selector} [data-value="secs"]`);
-
-        this.init();
-        this.startCount();
+        this._elements = this._getElements(selector);
+        this._targetDate = targetDate;
+        this._init();
+        this._startCount();
     }
 
-    convertTime(time) {
+    _getElements(timerId) {
+        const refs = {
+            dayCell: document.querySelector(`${timerId} [data-value="days"]`),
+            hourCell: document.querySelector(`${timerId} [data-value="hours"]`),
+            minCell: document.querySelector(`${timerId} [data-value="mins"]`),
+            secCell: document.querySelector(`${timerId} [data-value="secs"]`),
+        }
+        
+        return refs;
+    }
+
+    _convertTime(time) {
 const pad = function (value) {
                 return String(value).padStart(2, '0');
         };
@@ -31,29 +37,29 @@ const pad = function (value) {
 
     }
 
-    initVals() {
-let remainingTime = this.convertTime(this.targetDate - new Date());
-            this.dayCell.textContent = remainingTime.days;
-            this.hourCell.textContent = remainingTime.hours;
-            this.minCell.textContent = remainingTime.mins;
-            this.secCell.textContent = remainingTime.secs;
+    _initVals() {
+let remainingTime = this._convertTime(this._targetDate - new Date());
+            this._elements.dayCell.textContent = remainingTime.days;
+            this._elements.hourCell.textContent = remainingTime.hours;
+            this._elements.minCell.textContent = remainingTime.mins;
+            this._elements.secCell.textContent = remainingTime.secs;
     }
 
-    init() {
+    _init() {
         const passedDateVal = '00';
-            if (this.targetDate <= new Date()) {
-            this.dayCell.textContent = passedDateVal;
-            this.hourCell.textContent = passedDateVal;
-            this.minCell.textContent = passedDateVal;
-            this.secCell.textContent = passedDateVal;
+            if (this._targetDate <= new Date()) {
+            this._elements.dayCell.textContent = passedDateVal;
+            this._elements.hourCell.textContent = passedDateVal;
+            this._elements.minCell.textContent = passedDateVal;
+            this._elements.secCell.textContent = passedDateVal;
             return;
         }
 
-        this.initVals();
+        this._initVals();
         
     }
 
-    startCount() {
+    _startCount() {
         const timerActivity = setInterval(() => {
 
             if (this.targetDate <= new Date()) {
@@ -61,7 +67,7 @@ let remainingTime = this.convertTime(this.targetDate - new Date());
                 return;
             }
             
-            this.initVals();
+            this._initVals();
             
         }, 1000);
     }
