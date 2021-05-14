@@ -18,6 +18,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  overflow-y: hidden;
 }
 
 .timer {
@@ -28,9 +30,9 @@ body {
 }
 
 .field {
-  font-size: 35px;
+  font-size: 25px;
   font-weight: 700;
-  color: blueviolet;
+  color: black;
 
   display: flex;
   flex-direction: column;
@@ -40,4 +42,16 @@ body {
 
 .field:not(:last-child) {
   margin-right: 20px;
+}
+
+.value {
+  font-size: 80px;
+  padding: 0px 10px 0px 10px;
+
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+
+  background-color: black;
+  color: white;
 }
